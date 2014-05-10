@@ -56,14 +56,9 @@ public class GuildService implements INetworkDispatch {
 		if (leader == null)
 			return null;
 
-		int id = 0;
-		if (object.getGuildList().size() < 1) {
-			id = 0;
-		} else {
-			id = ((object.getGuildList().get(object.getGuildList().size()).getId() + 1));
-		}
+		int listSize = object.getGuildList().size();
 		
-		Guild guild = new Guild(id, abbreviation, name, leader);
+		Guild guild = new Guild((listSize == 0 ? 1 : (object.getGuildList().get(listSize).getId()) + 1), abbreviation, name, leader.getObjectID());
 		
 		object.getGuildList().add(guild);
 		
